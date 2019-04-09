@@ -72,7 +72,7 @@ async function shouldUseYarn() {
 
   const installCommand = useYarn ? 'yarn' : 'npm'
 
-  console.log(`Creating a new React app in ${chalk.green(projectUrl)}`);
+  console.log(`Creating a new Phaser 3 game in ${chalk.green(projectUrl)}`);
   console.log('');
 
   await ncp(
