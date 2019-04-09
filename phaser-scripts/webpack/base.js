@@ -5,8 +5,6 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const root = process.cwd();
 
-console.log(path.resolve(root, './index.html'));
-
 module.exports = {
   mode: 'development',
   devtool: 'eval-source-map',
@@ -34,9 +32,7 @@ module.exports = {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin(['dist'], {
-      root,
-    }),
+    new CleanWebpackPlugin(),
     new webpack.DefinePlugin({
       CANVAS_RENDERER: JSON.stringify(true),
       WEBGL_RENDERER: JSON.stringify(true),
