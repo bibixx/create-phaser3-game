@@ -5,7 +5,7 @@ const CleanWebpackPlugin = require('clean-webpack-plugin');
 
 const root = process.cwd();
 
-module.exports = {
+module.exports = () => ({
   mode: 'development',
   devtool: 'eval-source-map',
   module: {
@@ -17,6 +17,11 @@ module.exports = {
           loader: require.resolve('babel-loader'),
         },
       },
+      ...[process.env.NODE_ENV !== 'production' && {
+        test: /\.css$/,
+        exclude: /node_modules/,
+        use: [require.resolve('style-loader'), require.resolve('css-loader')],
+      }].filter(isTruthy => isTruthy),
       {
         test: [/\.vert$/, /\.frag$/],
         use: {
@@ -24,9 +29,12 @@ module.exports = {
         },
       },
       {
-        test: /\.(gif|png|jpe?g|svg|xml)$/i,
+        test: /\.(gif|png|jpe?g|svg|xml|mp3|wav)$/i,
         use: {
           loader: require.resolve('file-loader'),
+          options: {
+            name: 'static/assets/[name].[contenthash:8].[ext]',
+          },
         },
       },
     ],
@@ -41,4 +49,4 @@ module.exports = {
       template: path.resolve(root, './index.html'),
     }),
   ],
-};
+});

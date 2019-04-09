@@ -1,13 +1,14 @@
 const merge = require('webpack-merge');
 const TerserPlugin = require('terser-webpack-plugin');
-const base = require('./base');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const baseConfigFactory = require('./base');
 const { publicPath } = require('../utils/paths');
 
-module.exports = merge(base, {
+module.exports = () => merge(baseConfigFactory(), {
   mode: 'production',
   output: {
-    filename: '[name].bundle.js',
-    chunkFilename: '[name].bundle.js',
+    filename: 'static/js/[name].[contenthash:8].js',
+    chunkFilename: 'static/js/[name].[contenthash:8].chunk.js',
     path: publicPath,
   },
   devtool: false,
@@ -15,6 +16,28 @@ module.exports = merge(base, {
     maxEntrypointSize: 900000,
     maxAssetSize: 900000,
     hints: false,
+  },
+  plugins: [
+    new MiniCssExtractPlugin({
+      filename: 'static/css/[name].[contenthash:8].css',
+      chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
+    }),
+  ],
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: [
+          {
+            loader: MiniCssExtractPlugin.loader,
+            options: {
+
+            },
+          },
+          require.resolve('css-loader'),
+        ],
+      },
+    ],
   },
   optimization: {
     splitChunks: {

@@ -56,7 +56,7 @@ module.exports = {
         return {
           size: asset.size,
           sizeText,
-          name: `${chalk.dim(`${folder}${path.sep}`)}${chalk.cyan(asset.name)}`,
+          name: `${chalk.dim(`${folder}${path.sep}`)}${chalk.cyan(path.basename(asset.name))}`,
         };
       })
       .sort((assetA, assetB) => assetB.size - assetA.size)

@@ -1,8 +1,11 @@
 const webpack = require('webpack');
-const prodConfig = require('../webpack/prod');
 const buildLogger = require('../utils/buildLogger');
+const prodConfigFactory = require('../webpack/prod');
 
 module.exports = () => {
+  process.env.NODE_ENV = 'production';
+
+  const prodConfig = prodConfigFactory();
   const compiler = webpack(prodConfig);
   buildLogger.before();
 
