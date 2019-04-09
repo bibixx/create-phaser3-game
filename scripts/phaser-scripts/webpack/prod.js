@@ -2,7 +2,7 @@ const merge = require('webpack-merge');
 const TerserPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const baseConfigFactory = require('./base');
-const { publicPath } = require('../utils/paths');
+const { publicPath } = require('../utils/config');
 
 module.exports = () => merge(baseConfigFactory(), {
   mode: 'production',

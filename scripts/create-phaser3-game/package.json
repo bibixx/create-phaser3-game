@@ -1,0 +1,28 @@
+{
+  "name": "create-phaser3-game",
+  "version": "1.0.0",
+  "description": "A script for creating new Phaser 3 projects",
+  "main": "src/index.js",
+  "scripts": {
+    "build": "webpack --config phaser-scripts/webpack/prod.js",
+    "start": "webpack-dev-server --config phaser-scripts/webpack/base.js --open"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/bibixx/create-phaser3-game"
+  },
+  "bin": {
+    "create-phaser3-game": "./bin/index.js"
+  },
+  "author": "Bartosz Legieć <bartosz@legiec.eu> (https://legiec.io)",
+  "license": "MIT",
+  "licenseUrl": "http://www.opensource.org/licenses/mit-license.php",
+  "bugs": {
+    "url": "https://github.com/bibixx/create-phaser3-game/issues"
+  },
+  "homepage": "https://github.com/bibixx/create-phaser3-game#readme",
+  "dependencies": {
+    "chalk": "^2.4.2",
+    "ncp": "^2.0.0"
+  }
+}

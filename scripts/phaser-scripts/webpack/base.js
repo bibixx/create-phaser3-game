@@ -3,6 +3,8 @@ const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CleanWebpackPlugin = require('clean-webpack-plugin');
 
+const babelConfig = require('./babel');
+
 const root = process.cwd();
 
 module.exports = () => ({
@@ -15,6 +17,7 @@ module.exports = () => ({
         exclude: /node_modules/,
         use: {
           loader: require.resolve('babel-loader'),
+          options: babelConfig,
         },
       },
       ...[process.env.NODE_ENV !== 'production' && {
@@ -29,7 +32,7 @@ module.exports = () => ({
         },
       },
       {
-        test: /\.(gif|png|jpe?g|svg|xml|mp3|wav)$/i,
+        exclude: [/\.vert$/, /\.frag$/, /\.js$/, /\.css$/, /\.html$/, /\.json$/],
         use: {
           loader: require.resolve('file-loader'),
           options: {

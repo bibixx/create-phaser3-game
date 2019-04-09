@@ -1,6 +1,6 @@
 const chalk = require('chalk');
 const path = require('path');
-const { publicPath } = require('../utils/paths');
+const { publicPath } = require('../utils/config');
 const fileSize = require('./fileSize');
 
 module.exports = {

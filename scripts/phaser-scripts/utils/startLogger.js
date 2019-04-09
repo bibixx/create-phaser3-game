@@ -1,12 +1,26 @@
 const chalk = require('chalk');
+const ip = require('ip');
+const url = require('url');
 const clearConsole = require('../utils/clearConsole');
+const {
+  PORT, USE_YARN, HOST, HTTPS,
+} = require('../utils/config');
 
 const appName = 'test';
 const urls = {
-  localUrlForTerminal: 'http://localhost:3000/',
-  lanUrlForTerminal: 'http://10.10.10.19:3000/',
+  localUrlForTerminal: url.format({
+    protocol: HTTPS ? 'https' : 'http',
+    hostname: HOST,
+    port: chalk.bold(PORT),
+    pathname: '/',
+  }),
+  lanUrlForTerminal: url.format({
+    protocol: HTTPS ? 'https' : 'http',
+    hostname: ip.address(),
+    port: chalk.bold(PORT),
+    pathname: '/',
+  }),
 };
-const useYarn = true;
 const isInteractive = process.stdout.isTTY;
 
 module.exports = {
@@ -78,7 +92,7 @@ module.exports = {
     console.log('Note that the development build is not optimized.');
     console.log(
       'To create a production build, use '
-        + `${chalk.cyan(`${useYarn ? 'yarn' : 'npm run'} build`)}.`,
+        + `${chalk.cyan(`${USE_YARN ? 'yarn' : 'npm run'} build`)}.`,
     );
     return console.log();
   },

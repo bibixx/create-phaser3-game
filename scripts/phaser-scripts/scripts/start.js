@@ -2,9 +2,11 @@ const webpack = require('webpack');
 const WebpackDevServer = require('webpack-dev-server');
 const baseConfigFactory = require('../webpack/base');
 const startLogger = require('../utils/startLogger');
+const { PORT, HOST, HTTPS } = require('../utils/config');
 
 module.exports = () => {
   process.env.NODE_ENV = 'development';
+
   const baseConfig = baseConfigFactory();
   const compiler = webpack(baseConfig);
 
@@ -16,7 +18,6 @@ module.exports = () => {
     startLogger.done(stats);
   });
 
-  // eslint-disable-next-line no-new
   const server = new WebpackDevServer(compiler, {
     hot: true,
     inline: true,
@@ -24,9 +25,10 @@ module.exports = () => {
     clientLogLevel: 'none',
     quiet: true,
     overlay: false,
+    https: HTTPS,
   });
 
-  server.listen(8080, '127.0.0.1', () => {
+  server.listen(PORT, HOST, () => {
     startLogger.before();
   });
 };
