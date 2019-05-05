@@ -1,6 +1,6 @@
 {
   "name": "create-phaser3-game",
-  "version": "0.0.1-alpha.0",
+  "version": "0.1.0",
   "description": "A script for creating new Phaser 3 projects",
   "main": "src/index.js",
   "scripts": {
@@ -23,6 +23,7 @@
   "homepage": "https://github.com/bibixx/create-phaser3-game#readme",
   "dependencies": {
     "chalk": "^2.4.2",
-    "ncp": "^2.0.0"
+    "ncp": "^2.0.0",
+    "yargs": "^13.2.2"
   }
 }
